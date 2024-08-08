@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva</title>
+</head>
+
+<body>
+    <section id="cadastro">
+        <form action="" method="get">
+            <fieldset>
+                <legend>Cadastro de Reserva</legend><br>
+
+                <fieldset id="infoClient">
+                    <legend>Informações do Cliente</legend>
+
+                    <label>Nome Completo:</label><br>
+                    <input type="text" name="completeName"><br><br>
+                    <label>Email:</label><br>
+                    <input type="email" name="email" required><br><br>
+                </fieldset><br>
+
+                <fieldset id="serviçosDesejados">
+                    <legend>Serviços desejados</legend>
+
+                    <input type="checkbox" name="veiculo" value="veiculoAlugado">Veículo Alugado <br>
+                    <input type="checkbox" name="compraPassagens" value="passagem">Compra de Passagens <br>
+                    <input type="checkbox" name="reservaHospedagem" value="hospedagem">Reserva de Hospedagem<br><br>
+                </fieldset><br>
+
+                <fieldset id="pagamento">
+                    <legend>Forma de Pagemento</legend>
+
+                    <input type="radio" name="formaPagemento" value="cartaoCredito">Cartão de Crédito
+                    <br><input type="radio" name="formaPagemento" value="boletoBancario">Boleto Bancário
+                    <br><input type="radio" name="formaPagemento" value="pix">Pix
+                </fieldset><br>
+
+                <fieldset id="parcelamento">
+                    <legend>Parcelamento</legend>
+
+                    <select name="prazoPamento">
+                        <option value="aVista">À Vista</option>
+                        <option value="cincoVezesSemJuros">5x sem Juros</option>
+                        <option value="dezVezesComJuros" selected>10x com Juros</option>
+                    </select>
+                </fieldset>
+
+                <br>
+                <label>Algum comentário relevante para reserva?</label><br>
+                <textarea name="comentario" rows="8"></textarea>
+
+                <br><br><input type="submit" value="Enviar">
+
+            </fieldset>
+
+        </form>
+
+    </section>
+
+</body>
+
+</html>

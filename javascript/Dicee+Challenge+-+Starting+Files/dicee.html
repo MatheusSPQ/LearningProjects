@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Dicee</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet" />
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Refresh Me</h1>
+
+    <div class="dice">
+      <p>Player 1</p>
+      <img class="img1" src="" />
+    </div>
+
+    <div class="dice">
+      <p>Player 2</p>
+      <img class="img2" src="" />
+    </div>
+  </div>
+
+  <footer>www 🎲 App Brewery 🎲 com</footer>
+</body>
+<script>
+  var dado1 = parseInt(Math.random() * 6 + 1);
+  var dado2 = parseInt(Math.random() * 6 + 1);
+  document.getElementsByClassName("img1")[0].setAttribute('src', `./images/dice${dado1}.png`);
+  document.getElementsByClassName("img2")[0].setAttribute('src', `./images/dice${dado2}.png`);
+
+  if (dado1 > dado2) {
+    document.getElementsByTagName("h1")[0].textContent = "Player 1 Wins!";
+  } else if (dado2 > dado1) {
+    document.getElementsByTagName("h1")[0].textContent = "Player 2 Wins!";
+  } else {
+    document.getElementsByTagName("h1")[0].textContent = "Draw!";
+  }
+</script>
+
+</html>

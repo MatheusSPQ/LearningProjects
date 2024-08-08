@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <fieldset>
+        <legend>Adicione um novo funcionario</legend>
+        <form action="" method="" id="formulario">
+            <label> Nome:</label>
+            <input type="text" name="name" required><br><br>
+            <label> Idade:</label>
+            <input type="number" name="idade" required><br><br>
+            <label>Cargo:</label>
+            <input type="text" name="cargo" id="cargo"><br><br>
+            <label>Departamento:</label>
+            <input type="text" name="departamento"><br><br>
+            <label>Linguagem:</label>
+            <input type="text" name="linguagem" id="linguagem"><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </fieldset>
+    <br>
+    <h2>Funcionarios</h2>
+    <h3>Clique em um funcionario para ele fazer as ações dele!</h3>
+
+
+    <script>
+
+        var formu = document.getElementById("formulario");
+        var funcionarios = []
+        var nome, idade, cargo, departamento, linguagem;
+        formu.addEventListener("submit", (e) => {
+            var formData = new FormData(formu);
+            nome = formData.get("name")
+            idade = Number(formData.get("idade"))
+            cargo = formData.get("cargo")
+            departamento = formData.get("departamento")
+            linguagem = formData.get("linguagem")
+            try {
+                switch (cargo.toLocaleLowerCase()) {
+                    case "desenvolvedor":
+                        funcionarios.push(new Desenvolvedor(nome, idade, cargo, linguagem));
+                        createButton(funcionarios)
+                        alert("Funcionario criado")
+                        break;
+                    case "gerente":
+                        funcionarios.push(new Gerente(nome, idade, cargo, departamento));
+                        createButton(funcionarios)
+                        alert("Funcionario criado")
+                        break;
+
+                    default:
+                        funcionarios.push(new Funcionario(nome, idade, cargo));
+                        createButton(funcionarios)
+                        alert("Funcionario criado")
+                        break;
+                }
+
+            } catch (error) {
+                exibirError(error);
+            }
+
+            e.preventDefault();
+        })
+
+        function exibirError(erro) {
+            alert(erro)
+        }
+
+        let buttonCount = 0;
+
+        function createButton(funcionarios) {
+            // Incrementa o contador de botões
+            // Cria um novo elemento de botão
+            const newButton = document.createElement('button');
+
+            // Define o ID do botão
+            newButton.id = buttonCount;
+
+            // Define o texto do botão
+            newButton.innerText = `Funcionario${(buttonCount)}`;
+
+            // Adiciona o evento onclick ao botão que chama a função
+            newButton.onclick = function acao(e) {
+                // Obtém o ID do botão pressionado
+                let buttonId = e.target.id;
+                // Extrai o número do botão a partir do ID
+                let buttonNumber = parseInt(buttonId);
+
+                switch (funcionarios[buttonNumber].cargo.toLocaleLowerCase()) {
+                    case "gerente":
+                        alert(funcionarios[buttonNumber].seApresentar());
+                        alert(funcionarios[buttonNumber].trabalhar());
+                        alert(funcionarios[buttonNumber].gerenciar());
+                        break;
+                    case "desenvolvedor":
+                        alert(funcionarios[buttonNumber].seApresentar());
+                        alert(funcionarios[buttonNumber].trabalhar());
+                        alert(funcionarios[buttonNumber].programar());
+                        break;
+
+                    default:
+                        alert(funcionarios[buttonNumber].seApresentar());
+                        alert(funcionarios[buttonNumber].trabalhar());
+                        break;
+                };
+            };
+
+            const paragraph = document.createElement('p');
+            paragraph.innerText = `Nome: ${funcionarios[buttonCount].nome} \n 
+            Idade: ${funcionarios[buttonCount].idade} \n
+            Cargo: ${funcionarios[buttonCount].cargo}`;
+            document.body.appendChild(paragraph);
+            if (funcionarios[buttonCount].cargo.toLocaleLowerCase() == "desenvolvedor") {
+                const paragraph2 = document.createElement('p');
+                paragraph2.innerText = `Linguagem: ${funcionarios[buttonCount].linguagem} \n `
+                document.body.appendChild(paragraph2);
+            }
+            if (funcionarios[buttonCount].cargo.toLocaleLowerCase() == "gerente") {
+                const paragraph2 = document.createElement('p');
+                paragraph2.innerText = `Linguagem: ${funcionarios[buttonCount].departamento} \n `
+                document.body.appendChild(paragraph2);
+            }
+
+
+            buttonCount++;
+            // Adiciona o botão ao corpo do documento
+            document.body.appendChild(newButton)
+        }
+
+
+        class Funcionario {
+            constructor(nome, idade, cargo) {
+                if (typeof nome !== "string") {
+                    throw new Error("O nome precisa ser uma String");
+                }
+                else if (typeof idade !== "number") {
+                    throw new Error("A idade precisa ser um Número");
+                }
+                else if (typeof cargo !== "string") {
+                    throw new Error("O cargo precisa ser uma String");
+                } else if (cargo == "") {
+                    throw new Error("O cargo precisa ser preenchido");
+                } else {
+                    this.nome = nome;
+                    this.idade = idade;
+                    this.cargo = cargo;
+                }
+
+            }
+
+            seApresentar() {
+                return `Olá! sou o ${this.nome} e tenho ${this.idade} anos\n`;
+            }
+
+            trabalhar() {
+                return `Estou trabalhando de ${this.cargo} \n`;
+            }
+
+        }
+
+        class Gerente extends Funcionario {
+            constructor(nome, idade, cargo, departamento) {
+                super(nome, idade, cargo);
+                if (typeof departamento !== "string") {
+                    throw new Error("O departamento precisa ser uma String");
+                } else if (departamento == "") {
+                    throw new Error("O departamento precisa ser preenchido");
+                } else {
+                    this.departamento = departamento;
+                }
+
+            }
+
+            gerenciar() {
+                return `Estou gerenciando o departamento de ${this.departamento} \n`;
+            }
+        }
+
+        class Desenvolvedor extends Funcionario {
+            constructor(nome, idade, cargo, linguagem) {
+                super(nome, idade, cargo);
+                if (typeof linguagem !== "string") {
+                    throw new Error("A linguagem precisa ser uma String");
+                } else if (linguagem == "") {
+                    throw new Error("O linguagem precisa ser preenchido");
+                } else {
+                    this.linguagem = linguagem;
+                }
+            }
+
+            programar() {
+                return `Estou programando em ${this.linguagem} \n`;
+            }
+
+        }
+
+        var d1 = new Desenvolvedor("Matheus", 22, "Desenvolvedor", "Java");
+        var g1 = new Gerente("Carlos", 18, "Gerente", "Vendas");
+
+        funcionarios.push(d1)
+        createButton(funcionarios)
+        funcionarios.push(g1)
+        createButton(funcionarios)
+
+
+
+
+    </script>
+</body>
+
+</html>

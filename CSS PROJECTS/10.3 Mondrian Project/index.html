@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mondrian Project</title>
+  <style>
+    /* 
+    Write your CSS here 
+    Gap Colour: #000
+    White: #F0F1EC
+    Red: #E72F24
+    Black: #232629
+    Blue: #004592
+    Yellow: #F9D01E
+
+    For dimensions, see dimensions.png image.
+    HINT: Remember you can't change the properties of grid lines.
+    But grid lines are transparent!
+    */
+    body {
+      background-color: palegoldenrod;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .geral {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .prim {
+      background-color: black;
+      width: 748px;
+      display: grid;
+      grid-template-columns: 320px 198px 153px;
+      grid-template-rows: 414px 148px 148px 20px;
+      gap: 9px;
+    }
+
+    #a {
+      background-color: red;
+    }
+
+    #b {
+      background-color: white;
+      grid-column: span 3;
+    }
+
+    #c {
+      background-color: white;
+      grid-row-start: 2;
+      grid-row-end: 4;
+    }
+
+    #d {
+      background-color: white;
+      grid-column: span 2;
+      grid-row-start: 2;
+      grid-row-end: 4;
+
+    }
+
+    #e {
+      background-color: blue;
+      grid-row-start: 2;
+      height: 130px;
+    }
+
+    #f {
+      background-color: white;
+      height: 177px;
+
+    }
+
+    #g {
+      background-color: white;
+    }
+
+    #h {
+      background-color: yellow;
+    }
+
+    #i {
+      background-color: grey;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Write your HTML here -->
+  <div class="geral">
+    <div class="prim">
+      <div id="a">a</div>
+      <div id="b">b</div>
+      <div id="c">c</div>
+      <div id="d">d</div>
+      <div id="e">e</div>
+      <div id="f">f</div>
+      <div id="g">g</div>
+      <div id="h">h</div>
+      <div id="i">i</div>
+    </div>
+  </div>
+  
+
+</body>
+
+</html>
